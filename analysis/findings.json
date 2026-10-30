@@ -1,0 +1,455 @@
+{
+  "dataset_summary": {
+    "total_raw_rows": 2018,
+    "deduplicated_rows": 1988,
+    "exact_duplicate_rows_removed": 30,
+    "duplicate_order_ids_count": 30,
+    "in_transit_count": 1,
+    "completed_orders_evaluated": 1987,
+    "delivered_count": 1422,
+    "rto_count": 565,
+    "overall_rto_rate": 0.2843,
+    "average_order_value": 919.64,
+    "median_order_value": 748.0
+  },
+  "key_findings": [
+    {
+      "id": "finding_1_prior_rto_predictive_power",
+      "title": "Prior RTO History is the Strongest Predictor of Repeat COD Failure",
+      "headline": "Repeat buyers with clean history RTO at only 13.7%, but repeat buyers with prior RTO spike to 44.4% (3.24x risk jump)",
+      "details": {
+        "repeat_clean_orders": 350,
+        "repeat_clean_rto_rate": 0.14,
+        "repeat_with_rto_orders": 142,
+        "repeat_with_rto_rate": 0.4507,
+        "first_time_customer_orders": 1495,
+        "first_time_customer_rto_rate": 0.3023
+      },
+      "business_implication": "Blindly blocking COD for all first-time buyers kills 75% of customer acquisition. However, repeat customers with past RTO demonstrate habitual refusal patterns and should immediately require prepayment."
+    },
+    {
+      "id": "finding_2_address_quality_gap",
+      "title": "Placeholder and Vague Addresses Suffer a 62.0% RTO Rate",
+      "headline": "Defective addresses ('xyz', '.', 'call me', 'home') have a 62.0% failure rate vs. 25.0% for structured addresses",
+      "details": {
+        "defective_address_count": 183,
+        "defective_address_rto_rate": 0.6175,
+        "detailed_address_count": 1412,
+        "detailed_address_rto_rate": 0.2394,
+        "moderate_address_count": 392,
+        "moderate_address_rto_rate": 0.2908
+      },
+      "business_implication": "Most RTO in ecommerce is not malicious intent, but logistical unreachability. Catching and prompting customers for landmark/house numbers via WhatsApp before dispatch recovers address viability."
+    },
+    {
+      "id": "finding_3_suspicious_names_and_rapid_reorders",
+      "title": "Fake Names & Rapid Duplicate Checkouts Show Massive Risk Escalation",
+      "headline": "41 orders had test/gibberish names ('Test Order', 'asdf', 'qwerty') with a 63.4% RTO rate; 25 orders were rapid 2-minute duplicate checkouts",
+      "details": {
+        "suspicious_names_count": 44,
+        "suspicious_names_rto_rate": 0.6364,
+        "rapid_reorder_count": 28,
+        "zero_order_value_count": 3
+      },
+      "business_implication": "Automated regex & LLM name validation can effortlessly flag and intercept bots, accidental double checkouts, and prank orders without annoying genuine shoppers."
+    },
+    {
+      "id": "finding_4_channel_and_courier_variance",
+      "title": "Meta Ads Generates High Volume but Highest RTO Rate (31.3%)",
+      "headline": "Meta Ads delivers 38.6% of volume with 31.3% RTO, while Direct and WhatsApp broadcasts maintain 22.7% and 26.5% RTO",
+      "details": {
+        "meta_ads_orders": 765,
+        "meta_ads_rto_rate": 0.3124,
+        "direct_orders": 253,
+        "direct_rto_rate": 0.2292,
+        "delhivery_rto_rate": 0.2604,
+        "xpressbees_rto_rate": 0.3095
+      },
+      "business_implication": "Paid social acquisition converts top-of-funnel impulse shoppers who have lower delivery commitment. WhatsApp verification cools impulsive intent without destroying conversion."
+    }
+  ],
+  "segment_distributions": {
+    "first_time_vs_repeat": [
+      {
+        "is_first_time_customer": false,
+        "orders": 492,
+        "rto_count": 113,
+        "rto_rate": 0.2297
+      },
+      {
+        "is_first_time_customer": true,
+        "orders": 1495,
+        "rto_count": 452,
+        "rto_rate": 0.3023
+      }
+    ],
+    "repeat_prior_rto": [
+      {
+        "has_prior_rto": false,
+        "orders": 350,
+        "rto_count": 49,
+        "rto_rate": 0.14
+      },
+      {
+        "has_prior_rto": true,
+        "orders": 142,
+        "rto_count": 64,
+        "rto_rate": 0.4507
+      }
+    ],
+    "suspicious_names": [
+      {
+        "is_suspicious_name": false,
+        "orders": 1943,
+        "rto_count": 537,
+        "rto_rate": 0.2764
+      },
+      {
+        "is_suspicious_name": true,
+        "orders": 44,
+        "rto_count": 28,
+        "rto_rate": 0.6364
+      }
+    ],
+    "address_tiers": [
+      {
+        "address_tier": "CRITICAL_DEFECTIVE",
+        "orders": 183,
+        "rto_count": 113,
+        "rto_rate": 0.6175
+      },
+      {
+        "address_tier": "DETAILED",
+        "orders": 1412,
+        "rto_count": 338,
+        "rto_rate": 0.2394
+      },
+      {
+        "address_tier": "MODERATE",
+        "orders": 392,
+        "rto_count": 114,
+        "rto_rate": 0.2908
+      }
+    ],
+    "courier_performance": [
+      {
+        "courier": "BlueDart",
+        "orders": 184,
+        "rto_count": 54,
+        "rto_rate": 0.2935
+      },
+      {
+        "courier": "Delhivery",
+        "orders": 699,
+        "rto_count": 182,
+        "rto_rate": 0.2604
+      },
+      {
+        "courier": "Ecom Express",
+        "orders": 297,
+        "rto_count": 88,
+        "rto_rate": 0.2963
+      },
+      {
+        "courier": "Shadowfax",
+        "orders": 416,
+        "rto_count": 120,
+        "rto_rate": 0.2885
+      },
+      {
+        "courier": "Xpressbees",
+        "orders": 391,
+        "rto_count": 121,
+        "rto_rate": 0.3095
+      }
+    ],
+    "acquisition_sources": [
+      {
+        "utm_source": "direct",
+        "orders": 253,
+        "rto_count": 58,
+        "rto_rate": 0.2292
+      },
+      {
+        "utm_source": "google_ads",
+        "orders": 244,
+        "rto_count": 69,
+        "rto_rate": 0.2828
+      },
+      {
+        "utm_source": "influencer",
+        "orders": 225,
+        "rto_count": 61,
+        "rto_rate": 0.2711
+      },
+      {
+        "utm_source": "instagram_organic",
+        "orders": 232,
+        "rto_count": 68,
+        "rto_rate": 0.2931
+      },
+      {
+        "utm_source": "meta_ads",
+        "orders": 765,
+        "rto_count": 239,
+        "rto_rate": 0.3124
+      },
+      {
+        "utm_source": "whatsapp_broadcast",
+        "orders": 268,
+        "rto_count": 70,
+        "rto_rate": 0.2612
+      }
+    ],
+    "order_value_tiers": [
+      {
+        "value_tier": "<= 499",
+        "orders": 659,
+        "rto_count": 182,
+        "rto_rate": 0.2762
+      },
+      {
+        "value_tier": "500-999",
+        "orders": 643,
+        "rto_count": 191,
+        "rto_rate": 0.297
+      },
+      {
+        "value_tier": "1000-1499",
+        "orders": 404,
+        "rto_count": 82,
+        "rto_rate": 0.203
+      },
+      {
+        "value_tier": "1500-2499",
+        "orders": 244,
+        "rto_count": 94,
+        "rto_rate": 0.3852
+      },
+      {
+        "value_tier": "2500+",
+        "orders": 37,
+        "rto_count": 16,
+        "rto_rate": 0.4324
+      }
+    ],
+    "top_cities": [
+      {
+        "city": "Gorakhpur",
+        "orders": 45,
+        "rto_count": 28,
+        "rto_rate": 0.6222
+      },
+      {
+        "city": "Bareilly",
+        "orders": 33,
+        "rto_count": 20,
+        "rto_rate": 0.6061
+      },
+      {
+        "city": "Darbhanga",
+        "orders": 61,
+        "rto_count": 36,
+        "rto_rate": 0.5902
+      },
+      {
+        "city": "Sagar",
+        "orders": 53,
+        "rto_count": 26,
+        "rto_rate": 0.4906
+      },
+      {
+        "city": "Patna",
+        "orders": 80,
+        "rto_count": 38,
+        "rto_rate": 0.475
+      },
+      {
+        "city": "Kota",
+        "orders": 39,
+        "rto_count": 16,
+        "rto_rate": 0.4103
+      },
+      {
+        "city": "Guwahati",
+        "orders": 42,
+        "rto_count": 15,
+        "rto_rate": 0.3571
+      },
+      {
+        "city": "Nagaon",
+        "orders": 21,
+        "rto_count": 7,
+        "rto_rate": 0.3333
+      },
+      {
+        "city": "Lucknow",
+        "orders": 117,
+        "rto_count": 38,
+        "rto_rate": 0.3248
+      },
+      {
+        "city": "Indore",
+        "orders": 73,
+        "rto_count": 22,
+        "rto_rate": 0.3014
+      },
+      {
+        "city": "Jaipur",
+        "orders": 119,
+        "rto_count": 31,
+        "rto_rate": 0.2605
+      },
+      {
+        "city": "Hyderabad",
+        "orders": 173,
+        "rto_count": 44,
+        "rto_rate": 0.2543
+      }
+    ],
+    "top_risky_pincodes": [
+      {
+        "pincode": "600010",
+        "orders": 5,
+        "rto_count": 3,
+        "raw_rto_rate": 0.6,
+        "smoothed_rto_rate": 0.3895655091427612
+      },
+      {
+        "pincode": "110084",
+        "orders": 5,
+        "rto_count": 3,
+        "raw_rto_rate": 0.6,
+        "smoothed_rto_rate": 0.3895655091427612
+      },
+      {
+        "pincode": "110062",
+        "orders": 5,
+        "rto_count": 3,
+        "raw_rto_rate": 0.6,
+        "smoothed_rto_rate": 0.3895655091427612
+      },
+      {
+        "pincode": "560012",
+        "orders": 6,
+        "rto_count": 3,
+        "raw_rto_rate": 0.5,
+        "smoothed_rto_rate": 0.36521766482133866
+      },
+      {
+        "pincode": "411073",
+        "orders": 5,
+        "rto_count": 2,
+        "raw_rto_rate": 0.4,
+        "smoothed_rto_rate": 0.32289884247609457
+      },
+      {
+        "pincode": "226080",
+        "orders": 5,
+        "rto_count": 2,
+        "raw_rto_rate": 0.4,
+        "smoothed_rto_rate": 0.32289884247609457
+      },
+      {
+        "pincode": "400006",
+        "orders": 5,
+        "rto_count": 2,
+        "raw_rto_rate": 0.4,
+        "smoothed_rto_rate": 0.32289884247609457
+      },
+      {
+        "pincode": "400013",
+        "orders": 5,
+        "rto_count": 2,
+        "raw_rto_rate": 0.4,
+        "smoothed_rto_rate": 0.32289884247609457
+      },
+      {
+        "pincode": "400012",
+        "orders": 6,
+        "rto_count": 2,
+        "raw_rto_rate": 0.3333333333333333,
+        "smoothed_rto_rate": 0.30271766482133866
+      },
+      {
+        "pincode": "411047",
+        "orders": 8,
+        "rto_count": 2,
+        "raw_rto_rate": 0.25,
+        "smoothed_rto_rate": 0.2690823687300788
+      }
+    ],
+    "top_safe_pincodes": [
+      {
+        "pincode": "400010",
+        "orders": 7,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.16726368453773052
+      },
+      {
+        "pincode": "411013",
+        "orders": 6,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.1777176648213387
+      },
+      {
+        "pincode": "411066",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "411080",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "110079",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "110073",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "226016",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "110098",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "600099",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      },
+      {
+        "pincode": "560074",
+        "orders": 5,
+        "rto_count": 0,
+        "raw_rto_rate": 0.0,
+        "smoothed_rto_rate": 0.18956550914276127
+      }
+    ]
+  }
+}
